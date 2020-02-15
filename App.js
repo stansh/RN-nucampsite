@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 
 const store = ConfigureStore();
+console.disableYellowBox = true;
 
 export default function App() {
     return (
@@ -12,3 +13,4 @@ export default function App() {
         </Provider>
     );
 }
+
