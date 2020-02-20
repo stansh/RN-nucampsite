@@ -17,8 +17,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    postFavorite: campsiteId => (postFavorite(campsiteId)),
-    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
+    postFavorite: campsiteId => postFavorite(campsiteId),
+    postComment: (campsiteId, rating, author, text) => postComment(campsiteId, rating, author, text)
 
 };
 
@@ -42,8 +42,8 @@ function RenderComments({comments}) {
                     readonly
                     startingValue = {item.rating}
                     imageSize = {10}
-                    style={{alignItems: 'flex-start'}}
-                    paddingVertical = '5%'
+                    style={{ alignItems: "flex-start", paddingVertical: "5%" }}
+                   
                  />
                 {/* <Text style={{fontSize: 12}}>{item.rating} Stars</Text> */}
                 <Text style={{fontSize: 12}}>{`-- ${item.author}, ${item.date}`}</Text>
@@ -173,14 +173,19 @@ class CampsiteInfo extends Component {
         this.setState({showModal: !this.state.showModal});
     }
 
-    handleComment() {
-        const { rating, author, text } = this.state;
-        
-
-        // console.log(JSON.stringify(this.state));
-        this.props.postComment(this.props.campsiteId,rating, author, text );
+    handleComment(campsiteId) {
         this.toggleModal();
+        this.props.postComment(
+            campsiteId,
+            this.state.rating,
+            this.state.author,
+            this.state.text //???
+          );
     }
+        // console.log(JSON.stringify(this.state));
+        // this.props.postComment(this.props.campsiteId,rating, author, text );
+       
+    
 
     resetForm() {
         this.setState({
