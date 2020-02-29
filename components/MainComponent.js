@@ -349,22 +349,40 @@ class Main extends Component {
         this.props.fetchComments();
         this.props.fetchPromotions();
         this.props.fetchPartners();
-    
 
+
+    this.showNetInfo();
+    
         
     //connectInfo contains net info state object; fetch method retutns promise that resolves into net info state object
     
-    NetInfo.fetch().then(connectionInfo => {  
+   /*  NetInfo.fetch().then(connectionInfo => {  
         (Platform.OS === 'ios') ? // checking OS of the device to display a message
             Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
             : ToastAndroid.show('Initial Network Connectivity Type: ' +
                 connectionInfo.type, ToastAndroid.LONG);   
     });
+ */
 
-    this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
+  /*   this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
         this.handleConnectivityChange(connectionInfo);
     });
+} */
+
+showNetInfo = async() => { 
+    const connectionInfo = await NetInfo.fetch();
+    (Platform.OS === 'ios') ? // checking OS of the device to display a message
+        Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
+        : ToastAndroid.show('Initial Network Connectivity Type: ' +
+            connectionInfo.type, ToastAndroid.LONG); 
+    
 }
+
+
+
+
+
+
 
 componentWillUnmount() {
     this.unsubscribeNetInfo();
